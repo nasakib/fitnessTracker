@@ -5,10 +5,10 @@ const router = require("express").Router();
   router.post("/api/workouts", function(req, res) {
     db.Workout.create({})
 			.then((data) => res.json(data))
-			.catch(function (err) {
-				res.status(401).json(err);
+			.catch((err) => {
+				res.json(err);
 			})
-  });
+    });
 
  
   router.put("/api/workouts/:id", function({params, body}, res) {
@@ -16,10 +16,10 @@ const router = require("express").Router();
 			.then((data) => {
 				res.json(data);
 			})
-			.catch(function (err) {
-				res.status(401).json(err);
+			.catch((err) => {
+				res.json(err);
 			});
-  });
+   });
 
 
   router.get("/api/workouts", function(req, res) {
@@ -27,17 +27,19 @@ const router = require("express").Router();
 			.then((data) => {
 				res.json(data);
 			})
-			.catch(function (err) {
-				res.status(401).json(err);
-      })
-      
-  });
+			.catch((err) => {
+				res.json(err);
+      })  
+    });
 
   router.get("/api/workouts/range", (req, res) => {
     db.Workout.find({})
     .then(data => {
       res.json(data)
     })
-  });
+      .catch((err) => {
+        res.json(err)
+      })
+    });
 
   module.exports = router;
